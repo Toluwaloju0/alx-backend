@@ -3,7 +3,7 @@
 
 import csv
 import math
-from typing import Tuple, List, Dict
+from typing import Tuple, List, Dict, Union
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
@@ -34,7 +34,7 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """A function to get a data page"""
-        
+
         assert isinstance(page, int)
         assert isinstance(page_size, int)
         assert page > 0
@@ -53,23 +53,20 @@ class Server:
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """A function to get the hyper contents of a dataset"""
 
-        hyper_dict = {
-            'page_size': page_size, 'page': page, 'data': None,
+        hyper_dict: Dict[str, Union[int, List, None]] = {
+            'page_size': 0, 'page': page, 'data': None,
             'next_page': None, 'prev_page': None, 'total_pages': None
         }
+        data: List = self.dataset()
 
         hyper_dict['data'] = self.get_page(page, page_size)
 
-        page_data = self.get_page(page + 1, page_size)
+        page_data: List = self.get_page(page + 1, page_size)
+        hyper_dict['page_size'] = len(page_data)
         if len(page_data) > 0:
             hyper_dict['next_page'] = page + 1
         if page > 1:
-            page_data = self.get_page(page - 1, page_size)
-            if len(page_data) > 0:
-                hyper_dict['prev_page'] = page - 1
-        else:
-            hyper_dict['prev_page'] = 0
-        data = self.dataset()
+            hyper_dict['prev_page'] = page - 1
         hyper_dict['total_pages'] = int(len(data) / page_size)
 
         return hyper_dict
