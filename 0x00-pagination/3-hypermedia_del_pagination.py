@@ -60,5 +60,5 @@ class Server:
         hyper_dict['page_size'] = len(data_list)
         hyper_dict['data'] = data_list
         hyper_dict['next_index'] = index
-        
+
         return hyper_dict

@@ -8,5 +8,5 @@ from typing import Tuple
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """A function to paginate a page"""
 
-    end_page = page_size * page
+    end_page: int = page_size * page
     return end_page - page_size, end_page
