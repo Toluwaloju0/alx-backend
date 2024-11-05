@@ -4,6 +4,7 @@
 from flask import request
 babel = __import__('1-app').babel
 
+
 @babel.localeselector
 def get_locale():
     """To get the besgt language match"""
