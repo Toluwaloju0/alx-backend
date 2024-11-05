@@ -12,17 +12,16 @@ class Config:
 
     LANGUAGES = ["en", "fr"]
 
+    @babel.localeselector
+    def locale():
+        """To set the babel local language"""
 
-config = Config()
+        return config.LANGUAGES[0]
 
-@babel.localeselector
-def locale():
-    """To set the babel local language"""
+    @babel.timezoneselector
+    def timezone():
+        """To set the time zone"""
 
-    return config.LANGUAGES[0]
+        return 'UTC'
 
-@babel.timezoneselector
-def timezone():
-    """To set the time zone"""
-
-    return 'UTC'
+app.config.from_object('Config')
