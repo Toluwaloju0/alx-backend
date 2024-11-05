@@ -2,8 +2,9 @@
 """A mnodule to instantiate using Babel"""
 
 from flask_babel import Babel
+from flask import Flask
 
-app = __import__('0-app').app
+app = Flask(__name__)
 babel = Babel(app)
 
 
@@ -13,10 +14,10 @@ class Config:
     LANGUAGES = ["en", "fr"]
 
     @babel.localeselector
-    def locale():
+    def locale(self):
         """To set the babel local language"""
 
-        return Config.LANGUAGES[0]
+        return self.LANGUAGES[0]
 
     @babel.timezoneselector
     def timezone():
@@ -25,4 +26,8 @@ class Config:
         return 'UTC'
 
 
-app.config.from_object('Config')
+# app.config.from_object('Config')
+
+config = Config()
+
+config.locale()
