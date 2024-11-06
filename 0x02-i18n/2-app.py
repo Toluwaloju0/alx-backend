@@ -4,10 +4,11 @@
 from flask import request
 from typing import List
 babel = __import__('1-app').babel
+app = __import__('1-app').app
 
-
-@babel.localeselector
 def get_locale() -> List[str]:
     """To get the besgt language match"""
 
-    return request.accept_languages.best_match(babel.app.config['LANGUAGES'])
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+babel.locale_selector = get_locale()
