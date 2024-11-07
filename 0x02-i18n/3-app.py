@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""A module to use the gettext of babel"""
+"""
+from flask import render_template
+app = __import__('2-app').app
 
-from flask_babel import gettext, init_app
-babel = __import__('2-app').babel
-
-
-home_title = gettext(u"Welcome to Holberton")
-home_header = gettext(u'Hello world!')
+@app.route('/')
+def get_3():
+    return render_template('3-index.html')
 
 if __name__ == '__main__':
-    init_app(babel)
+    app.run()"""
