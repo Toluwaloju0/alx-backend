@@ -4,6 +4,6 @@
 from flask import render_template
 app = __import__('2-app').app
 
-@app.route('/3')
+@app.route('/')
 def get_3():
     return render_template('3-index.html')
