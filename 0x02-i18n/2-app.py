@@ -9,6 +9,6 @@ app = __import__('1-app').app
 
 @babel.localeselector()
 def get_locale():
-    """To get the besgt language match"""
+    """To get the best language match"""
 
     return request.accept_languages.best_match(app.config['LANGUAGES'])
