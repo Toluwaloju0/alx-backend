@@ -17,6 +17,7 @@ class Config:
 app.config.from_object(Config)
 babel = Babel(app)
 
+
 @app.route('/', strict_slashes=False)
 def get_home():
     """The home page"""
