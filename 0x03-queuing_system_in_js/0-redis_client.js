@@ -1,6 +1,6 @@
-import { createClient } from redis;
+import { createClient } from 'redis';
 
-const client = createclient();
+const client = createClient();
 //If the client is ready log the ready message
 client.on('connect', () => {
   console.log('Redis client connected to the server');
